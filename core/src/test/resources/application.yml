@@ -1,0 +1,61 @@
+spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false
+  jpa:
+    show-sql: true
+    properties:
+      javax.persistence.sharedCache.mode: ENABLE_SELECTIVE
+      hibernate.hbm2ddl.auto: none # NOT SUPPORT
+      javax:
+        persistence:
+          sharedCache:
+            mode: ALL
+        ddl-auto: none # NOT SUPPORT
+        format_sql: true
+        use-new-id-generator-mappings: false
+        globally_quoted_identifiers: true
+        use_sql_comments: true
+    open-in-view: false
+  datasource:
+    hikari:
+      ddl-auto: update
+      primary-pgsqldb:
+        driver-class-name: org.postgresql.Driver
+        jdbc-url: "jdbc:postgresql://localhost:3432/primary"
+        username: grissom
+        password: grissom
+        minimum-idle: 2
+        maximum-pool-size: 5
+        max-lifetime: 50000
+        idle-timeout: 40000
+        type: com.zaxxer.hikari.HikariDataSource
+        auto-commit: false
+      secondary-pgsqldb:
+        driver-class-name: org.postgresql.Driver
+        jdbc-url: "jdbc:postgresql://localhost:3432/secondary"
+        username: grissom
+        password: grissom
+        minimum-idle: 2
+        maximum-pool-size: 5
+        max-lifetime: 50000
+        idle-timeout: 40000
+        type: com.zaxxer.hikari.HikariDataSource
+        auto-commit: false
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6566
+      lettuce:
+        pool:
+          max-active: 15
+          max-idle: 8
+          min-idle: 3
+          max-wait: -1
+        shutdown-timeout: 2000
+      timeout: 3000
+  cache:
+    type: redis
+
+local:
+  timezone: "Asia/Seoul"
