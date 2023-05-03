@@ -6,4 +6,4 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor
 import org.springframework.stereotype.Repository
 
 @Repository
-interface MemoRepository : JpaRepository<MemoEntity, Long>, QuerydslPredicateExecutor<MemoEntity>
+interface MemoRepository : JpaRepository<MemoEntity, Long>, QuerydslPredicateExecutor<MemoEntity>, MemoRepositoryCustom

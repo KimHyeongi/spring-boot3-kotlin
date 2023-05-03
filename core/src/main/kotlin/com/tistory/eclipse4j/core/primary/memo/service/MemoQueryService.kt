@@ -1,5 +1,6 @@
 package com.tistory.eclipse4j.core.primary.memo.service
 
+import com.tistory.eclipse4j.core.primary.memo.condition.MemoQueryCondition
 import com.tistory.eclipse4j.core.primary.memo.entity.MemoEntity
 import com.tistory.eclipse4j.core.primary.memo.entity.MemoType
 import com.tistory.eclipse4j.core.primary.memo.entity.QMemoEntity
@@ -15,8 +16,7 @@ class MemoQueryService(
     val memoRepository: MemoRepository
 
 ) {
-
-    fun findByCondition(pageRequest: Pageable): Page<MemoEntity>{
-        return memoRepository.findAll(pageRequest)
+    fun findAllByCondition(memoQueryCondition: MemoQueryCondition): Page<MemoEntity>{
+        return memoRepository.findAllByCondition(memoQueryCondition)
     }
 }
