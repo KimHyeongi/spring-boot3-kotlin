@@ -22,7 +22,7 @@ class MemoTagEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     @Where(clause = "type = 'brand'")
     var memo: MemoEntity
-){
+) {
     @Column(nullable = false, name = "tag")
     @Comment("TAG")
     var tag: String = tag
