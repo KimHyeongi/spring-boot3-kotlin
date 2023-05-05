@@ -16,8 +16,8 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest(classes = [CoreDomainApplicationTest::class])
-@Transactional(readOnly = true)
-@Rollback(false)
+@Transactional(readOnly = false)
+@Rollback(value = true)
 internal class MemoCommandServiceSpringTest(
     sut: MemoCommandService
 ) : StringSpec() {
@@ -33,7 +33,7 @@ internal class MemoCommandServiceSpringTest(
                 memoTags = mutableListOf()
             )
             val results = sut.save(memo)
-            memo.title shouldBe "타이틀입니다"
+            memo.title shouldBe "타이틀입니다."
             memo.memoCategories.size shouldBe 0
         }
 
@@ -62,7 +62,7 @@ internal class MemoCommandServiceSpringTest(
                 )
             ))
             val results = sut.save(memo)
-            memo.title shouldBe "타이틀입니다"
+            memo.title shouldBe "타이틀입니다."
             memo.memoCategories.size shouldBe 2
         }
 
