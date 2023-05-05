@@ -12,10 +12,6 @@ import org.hibernate.annotations.Comment
 )
 @org.hibernate.annotations.Table(appliesTo = "memo", comment = "메모")
 class MemoEntity(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    var id: Long = 0,
     title: String,
     contents: String,
     memoType: MemoType,
@@ -26,6 +22,12 @@ class MemoEntity(
     @OrderBy("sort asc")
     var memoTags: MutableList<MemoTagEntity> = mutableListOf()
 ) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    var id: Long? = null
+        protected set
+
     @Column(nullable = false, name = "title")
     @Comment("단어")
     var title: String = title
@@ -41,4 +43,12 @@ class MemoEntity(
     @Comment("메모 타입")
     var memoType: MemoType = memoType
         protected set
+
+    fun updateCategories(memoCategories: MutableList<MemoCategoryEntity>) {
+        this.memoCategories = memoCategories
+    }
+
+    fun updateTags(memoTags: MutableList<MemoTagEntity>) {
+        this.memoTags = memoTags
+    }
 }

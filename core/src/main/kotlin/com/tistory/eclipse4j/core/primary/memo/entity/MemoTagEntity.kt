@@ -14,17 +14,24 @@ import org.hibernate.annotations.Where
 )
 @org.hibernate.annotations.Table(appliesTo = "memo_tag", comment = "메모 Tag")
 class MemoTagEntity(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    var id: Long = 0,
     tag: String,
+    sort: Int,
     @ManyToOne(fetch = FetchType.LAZY)
     @Where(clause = "type = 'brand'")
     var memo: MemoEntity
 ) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    var id: Long? = null
+        protected set
+
     @Column(nullable = false, name = "tag")
     @Comment("TAG")
     var tag: String = tag
+        protected set
+
+    @Column(nullable = false, name = "sort")
+    var sort: Int = sort
         protected set
 }
