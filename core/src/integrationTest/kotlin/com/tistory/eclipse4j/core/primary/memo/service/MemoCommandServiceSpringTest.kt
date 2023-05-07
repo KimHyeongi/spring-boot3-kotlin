@@ -33,8 +33,8 @@ internal class MemoCommandServiceSpringTest(
                 memoTags = mutableListOf()
             )
             val results = sut.save(memo)
-            memo.title shouldBe "타이틀입니다"
-            memo.memoCategories.size shouldBe 0
+            results.title shouldBe "타이틀입니다"
+            results.memoCategories.size shouldBe 0
         }
 
         "메모 - 카테고리,태그 저장" {
@@ -62,8 +62,8 @@ internal class MemoCommandServiceSpringTest(
                 )
             ))
             val results = sut.save(memo)
-            memo.title shouldBe "타이틀입니다"
-            memo.memoCategories.size shouldBe 2
+            results.title shouldBe "타이틀입니다"
+            results.memoCategories.size shouldBe 2
         }
 
     }
