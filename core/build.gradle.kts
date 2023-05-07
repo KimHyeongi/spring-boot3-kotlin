@@ -17,9 +17,10 @@ noArg {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-cache")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+    api("org.springframework.boot:spring-boot-starter-data-jpa")
+    api("org.springframework.boot:spring-boot-starter-cache")
+    api("org.springframework.boot:spring-boot-starter-data-redis")
 
     // https://github.com/resilience4j/resilience4j-spring-boot3-demo 참고
     // implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")

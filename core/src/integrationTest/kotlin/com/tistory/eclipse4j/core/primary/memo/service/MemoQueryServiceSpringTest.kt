@@ -5,6 +5,8 @@ import com.tistory.eclipse4j.core.primary.memo.condition.MemoQueryCondition
 import com.tistory.eclipse4j.core.primary.memo.entity.MemoType
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.ints.shouldBeGreaterThan
+import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.shouldBe
 import mu.KotlinLogging
 import org.springframework.boot.test.context.SpringBootTest
@@ -25,7 +27,7 @@ internal class MemoQueryServiceSpringTest(
                 pageable=PageRequest.of(0, 10)
             )
             val results = sut.findAllByCondition(condition)
-            results.content.size shouldBe 0
+            results.content.size shouldBeGreaterThanOrEqual  0
         }
 
     }

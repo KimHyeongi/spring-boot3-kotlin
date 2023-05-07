@@ -13,5 +13,12 @@ enum class RedisCacheKeyProperties(
         true,
         "KEY",
         0
-    )
+    ),
+    cached_memo_by_id(
+    "메모 캐시",
+    60 * 60 * 24L,
+    true,
+    "KEY",
+    0
+    ), // second s * m * h
 }
