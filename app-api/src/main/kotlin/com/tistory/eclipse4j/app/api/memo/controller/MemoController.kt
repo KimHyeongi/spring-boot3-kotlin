@@ -2,6 +2,8 @@ package com.tistory.eclipse4j.app.api.memo.controller
 
 import com.tistory.eclipse4j.app.api.memo.response.Memo
 import com.tistory.eclipse4j.app.api.memo.service.MemoFindService
+import com.tistory.eclipse4j.core.primary.memo.condition.MemoQueryCondition
+import org.springframework.data.domain.Page
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -13,6 +15,13 @@ import org.springframework.web.bind.annotation.RestController
 class MemoController(
     private val memoFindService: MemoFindService
 ) {
+
+
+    @GetMapping("")
+    fun all(memoQueryCondition: MemoQueryCondition): ResponseEntity<Page<Memo>> {
+        val pageMemos = memoFindService.findAll(memoQueryCondition)
+        return ResponseEntity.ok(pageMemos)
+    }
 
     @GetMapping("/{id}")
     fun get(@PathVariable("id") id: Long): ResponseEntity<Memo> {

@@ -4,5 +4,5 @@ import com.querydsl.core.annotations.QueryProjection
 
 data class MemoTypeSummaryProjection @QueryProjection constructor(
     val memoType: MemoType,
-    val count: Int = 0,
+    val count: Long = 0,
 )

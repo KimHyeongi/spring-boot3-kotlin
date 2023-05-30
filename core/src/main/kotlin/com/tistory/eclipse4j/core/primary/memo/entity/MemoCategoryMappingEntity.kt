@@ -1,40 +1,34 @@
 package com.tistory.eclipse4j.core.primary.memo.entity
 
+import com.tistory.eclipse4j.core.primary.base.entity.AuditingEntity
 import jakarta.persistence.*
 import org.hibernate.annotations.Comment
 import org.hibernate.annotations.Where
 
-
 @Entity
 @Table(
-    name = "memo_category",
+    name = "memo_category_mapping",
     indexes = [
         // ,Index(name = "idx_dic_multiple_columns", columnList = "word, xxxx")
     ]
 )
 @Comment("메모 카테고리")
-class MemoCategoryEntity(
+class MemoCategoryMappingEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     var id: Long? = null,
-    name: String,
-    sort: Int
-) {
-
-    @Column(nullable = false, name = "name")
-    var name: String = name
-        protected set
-
+    sort: Int,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Where(clause = "deleted = false")
+    var memo: MemoEntity,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Where(clause = "deleted = false")
+    var memoCategory: MemoCategoryEntity
+): AuditingEntity() {
     @Column(nullable = false, name = "sort")
+    @Comment("순서")
     var sort: Int = sort
         protected set
 
-    @OneToMany(mappedBy = "memoCategory", fetch = FetchType.LAZY)
-    var memoCategoryMappings: MutableList<MemoCategoryMappingEntity> = mutableListOf()
-        protected set
-
-    fun updateCategoryMappings(categoryMappings: MutableList<MemoCategoryMappingEntity>){
-        this.memoCategoryMappings = categoryMappings
-    }
 }

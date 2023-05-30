@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = false)
 class MemoCommandService(
-    val memoRepository: MemoRepository
+    private val memoRepository: MemoRepository
 ) {
-    fun save(memoEntity: MemoEntity): MemoEntity{
-        return memoRepository.save(memoEntity)
+    fun save(entity: MemoEntity): MemoEntity{
+        return memoRepository.save(entity)
     }
 }

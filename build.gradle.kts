@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.0.6"
+    id("org.springframework.boot") version "3.1.0"
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version Versions.kotlin
     kotlin("plugin.spring") version Versions.kotlin
@@ -105,6 +105,7 @@ subprojects {
         create("integrationTest") {
             compileClasspath += sourceSets.main.get().output + sourceSets.test.get().output
             runtimeClasspath += sourceSets.main.get().output + sourceSets.test.get().output
+            // resources.srcDir("src/integrationTest/kotlin/resources")
         }
     }
 

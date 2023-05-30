@@ -57,6 +57,13 @@ idea {
     }
 }
 
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+    jvmArgs(
+        "-Xshare:off",
+    )
+    maxParallelForks = 1
+}
 
 tasks.register("prepareKotlinBuildScriptModel"){}
 

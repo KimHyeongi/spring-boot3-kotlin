@@ -13,22 +13,23 @@ class MemoRepositoryImpl():
     JpaPrimaryQueryDslRepositorySupport(MemoEntity::class.java),
     MemoRepositoryCustom {
 
-    val q = QMemoEntity.memoEntity
+    val q = QMemoEntity.memoEntity!!
+
     override fun findAllByCondition(condition: MemoQueryCondition): Page<MemoEntity> {
         val count = from(q)
             .where(
-                q.memoType.eq(condition.memoType)
+                condition.eqMemoType()
             )
             .fetchCount()
         val results = from(q)
             .where(
-                q.memoType.eq(condition.memoType)
+                condition.eqMemoType()
             )
             .orderBy(q.id.desc())
-            .limit(condition.pageable.pageSize.toLong())
-            .offset(condition.pageable.offset)
+            .limit(condition.pageable().pageSize.toLong())
+            .offset(condition.pageable().offset)
             .fetch()
-        return PageImpl(results, condition.pageable, count)
+        return PageImpl(results, condition.pageable(), count)
     }
 
     override fun groupByMemoType(): MutableList<MemoTypeSummaryProjection> {

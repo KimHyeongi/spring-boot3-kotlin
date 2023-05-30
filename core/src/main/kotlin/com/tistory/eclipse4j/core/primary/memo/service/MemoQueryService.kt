@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class MemoQueryService(
-    val memoRepository: MemoRepository
+    private val memoRepository: MemoRepository
 ) {
-    fun findAllByCondition(memoQueryCondition: MemoQueryCondition): Page<MemoEntity> {
-        return memoRepository.findAllByCondition(memoQueryCondition)
+    fun findAllByCondition(condition: MemoQueryCondition): Page<MemoEntity> {
+        return memoRepository.findAllByCondition(condition)
     }
 
-    fun groupByMemoType(): MutableList<MemoTypeSummaryProjection> {
+    fun groupByAllMemoType(): MutableList<MemoTypeSummaryProjection> {
         return memoRepository.groupByMemoType()
     }
 

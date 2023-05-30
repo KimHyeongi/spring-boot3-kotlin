@@ -1,5 +1,6 @@
 package com.tistory.eclipse4j.core.primary.memo.entity
 
+import com.tistory.eclipse4j.core.primary.base.entity.AuditingEntity
 import jakarta.persistence.*
 import org.hibernate.annotations.Comment
 
@@ -10,18 +11,18 @@ import org.hibernate.annotations.Comment
         // ,Index(name = "idx_dic_multiple_columns", columnList = "word, xxxx")
     ]
 )
-@org.hibernate.annotations.Table(appliesTo = "memo", comment = "메모")
+@Comment("메모")
 class MemoEntity(
     title: String,
     contents: String,
     memoType: MemoType,
     @OneToMany(mappedBy = "memo")
     @OrderBy("sort asc")
-    var memoCategories: MutableList<MemoCategoryEntity> = mutableListOf(),
-    @OneToMany(mappedBy = "memo")
+    var memoCategoryMappings: MutableList<MemoCategoryMappingEntity> = mutableListOf(),
+    @ElementCollection(fetch = FetchType.LAZY)
     @OrderBy("sort asc")
     var memoTags: MutableList<MemoTagEntity> = mutableListOf()
-) {
+): AuditingEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -44,8 +45,8 @@ class MemoEntity(
     var memoType: MemoType = memoType
         protected set
 
-    fun updateCategories(memoCategories: MutableList<MemoCategoryEntity>) {
-        this.memoCategories = memoCategories
+    fun updateCategoryMappings(memoCategoryMappings: MutableList<MemoCategoryMappingEntity>) {
+        this.memoCategoryMappings = memoCategoryMappings
     }
 
     fun updateTags(memoTags: MutableList<MemoTagEntity>) {
