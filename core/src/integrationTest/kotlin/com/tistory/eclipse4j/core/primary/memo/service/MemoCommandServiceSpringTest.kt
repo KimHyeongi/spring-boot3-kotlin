@@ -19,26 +19,34 @@ import org.springframework.transaction.annotation.Transactional
 @Profile("test")
 @SpringBootTest(classes = [CoreDomainApplicationTest::class])
 @Transactional(readOnly = false)
-@Rollback(value = true)
+@Rollback(value = false)
 internal class MemoCommandServiceSpringTest(
     sut: MemoCommandService
-) : StringSpec() {
-    private val log = KotlinLogging.logger { }
+) : StringSpec(
+    {
+        val log = KotlinLogging.logger { }
 
-
-    suspend fun beforeTest(testCase: TestCase) {
-        System.out.println("=======TEST")
-    }
-
-    init {
-
-        "메모만 저장" {
-            true shouldBe true
+        "메모 - 저장" {
+            val memo = MemoEntity(
+                title = "타이틀입니다.",
+                contents = "내용입니다.",
+                memoType = MemoType.STANDARD,
+                memoTags = mutableListOf()
+            )
+            val results = sut.save(memo)
+            results.title shouldBe "타이틀입니다"
         }
 
-        "메모 - 카테고리,태그 저장" {
-            true shouldBe true
+        "메모 - 태그 저장" {
+            val memo = MemoEntity(
+                title = "타이틀입니다.",
+                contents = "내용입니다.",
+                memoType = MemoType.STANDARD,
+                memoTags = mutableListOf(MemoTagEntity(tag = "태그", sort = 0), MemoTagEntity(tag = "태그", sort = 1))
+            )
+            val results = sut.save(memo)
+            results.title shouldBe "타이틀입니다."
         }
 
     }
-}
+)
