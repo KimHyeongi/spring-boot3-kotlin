@@ -21,9 +21,16 @@ class MemoEntity(
     var memoCategoryMappings: MutableList<MemoCategoryMappingEntity> = mutableListOf(),
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "memo_tag",
-        joinColumns = [JoinColumn(name = "memo_id")],
+        joinColumns = [
+            JoinColumn(name = "memo_id")
+        ],
         foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT),
-        indexes = [Index(columnList = "memo_id", name = "idx_memo_tag_memo_id")]
+        indexes = [
+            Index(
+                columnList = "memo_id",
+                name = "idx_memo_tag_memo_id"
+            )
+        ]
     )
     @OrderBy("sort asc")
     var memoTags: MutableList<MemoTagEntity> = mutableListOf()

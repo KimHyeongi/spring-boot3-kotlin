@@ -34,7 +34,7 @@ data class MemoCategoryForm(
 
     companion object Factory {
 
-        fun toEntity(form: MemoCategoryForm, memoEntity: MemoEntity): MemoCategoryEntity {
+        fun toEntity(form: MemoCategoryForm): MemoCategoryEntity {
             return MemoCategoryEntity(
                 id = form.id,
                 name = form.name,
@@ -51,7 +51,7 @@ data class MemoTagForm(
 ) : Serializable {
 
     companion object Factory {
-        fun toEntity(form: MemoTagForm, memoTagEntity: MemoTagEntity): MemoTagEntity {
+        fun toEntity(form: MemoTagForm): MemoTagEntity {
             return MemoTagEntity(
                 tag = form.tag,
                 sort = form.sort,

@@ -34,7 +34,7 @@ internal class MemoCommandServiceSpringTest(
                 memoTags = mutableListOf()
             )
             val results = sut.save(memo)
-            results.title shouldBe "타이틀입니다"
+            results.title shouldBe "타이틀입니다."
         }
 
         "메모 - 태그 저장" {

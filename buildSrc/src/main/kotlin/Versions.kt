@@ -29,5 +29,7 @@ object Versions {
     const val springdoc_openapi_ui = "1.6.14"
     const val springdoc_openapi_kotlin = "1.6.14"
     const val hibernate_types_55 = "2.21.1"
+
+    const val jwt = "4.4.0"
 }
 

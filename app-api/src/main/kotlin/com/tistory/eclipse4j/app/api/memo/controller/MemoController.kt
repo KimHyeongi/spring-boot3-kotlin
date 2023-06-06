@@ -1,5 +1,7 @@
 package com.tistory.eclipse4j.app.api.memo.controller
 
+import com.tistory.eclipse4j.app.api.auth.resolver.Auth
+import com.tistory.eclipse4j.app.api.auth.user.AuthUser
 import com.tistory.eclipse4j.app.api.memo.response.Memo
 import com.tistory.eclipse4j.app.api.memo.service.MemoFindService
 import com.tistory.eclipse4j.core.primary.memo.condition.MemoQueryCondition
@@ -18,13 +20,13 @@ class MemoController(
 
 
     @GetMapping("")
-    fun all(memoQueryCondition: MemoQueryCondition): ResponseEntity<Page<Memo>> {
+    fun all(memoQueryCondition: MemoQueryCondition, @Auth user: AuthUser): ResponseEntity<Page<Memo>> {
         val pageMemos = memoFindService.findAll(memoQueryCondition)
         return ResponseEntity.ok(pageMemos)
     }
 
     @GetMapping("/{id}")
-    fun get(@PathVariable("id") id: Long): ResponseEntity<Memo> {
+    fun get(@PathVariable("id") id: Long, @Auth user: AuthUser): ResponseEntity<Memo> {
         val memo = memoFindService.get(id)
         return ResponseEntity.ok(memo)
     }
