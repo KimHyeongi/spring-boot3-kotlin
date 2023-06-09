@@ -25,6 +25,11 @@ springdoc:
 ---
 server:
   port: 8080
+  servlet:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
 spring:
   config:
     activate:
@@ -32,6 +37,11 @@ spring:
 ---
 server:
   port: 8080
+  servlet:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
 spring:
   config:
     activate:

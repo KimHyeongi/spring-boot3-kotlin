@@ -12,7 +12,8 @@ class AuthTokenHandler(
     fun getUserInfoFromToken(token : String) : AuthUser {
         val timestampNow = memoDateTimeProvider.now()
         return authTokenApiProvider.findAuthUserByTokenNotExpired(
-            token = token, timestamp = timestampNow
+            token = token,
+            timestamp = timestampNow
         )
     }
 }

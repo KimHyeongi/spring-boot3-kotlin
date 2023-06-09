@@ -5,6 +5,7 @@ import com.tistory.eclipse4j.app.api.auth.user.AuthUser
 import com.tistory.eclipse4j.app.api.memo.response.Memo
 import com.tistory.eclipse4j.app.api.memo.service.MemoFindService
 import com.tistory.eclipse4j.core.primary.memo.condition.MemoQueryCondition
+import mu.KotlinLogging
 import org.springframework.data.domain.Page
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,9 +19,11 @@ class MemoController(
     private val memoFindService: MemoFindService
 ) {
 
+    val log = KotlinLogging.logger { }
 
     @GetMapping("")
     fun all(memoQueryCondition: MemoQueryCondition, @Auth user: AuthUser): ResponseEntity<Page<Memo>> {
+        log.info { "로그인 정보 : ${user.email} / ${user.name}" }
         val pageMemos = memoFindService.findAll(memoQueryCondition)
         return ResponseEntity.ok(pageMemos)
     }
