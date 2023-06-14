@@ -19,7 +19,7 @@ spring:
     open-in-view: false
   datasource:
     hikari:
-      ddl-auto: none
+      ddl-auto: update
       primary-pgsqldb:
         driver-class-name: org.postgresql.Driver
         jdbc-url: "jdbc:postgresql://localhost:3432/primary"

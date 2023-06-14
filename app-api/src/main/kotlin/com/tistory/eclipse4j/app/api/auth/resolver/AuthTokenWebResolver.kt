@@ -9,6 +9,7 @@ import org.springframework.web.bind.support.WebDataBinderFactory
 import org.springframework.web.context.request.NativeWebRequest
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
 import org.springframework.web.method.support.ModelAndViewContainer
+import org.springframework.web.reactive.function.client.WebClientResponseException.NotFound
 import org.springframework.web.util.WebUtils
 
 @Component
@@ -25,19 +26,18 @@ class AuthTokenWebResolver(
         mavContainer: ModelAndViewContainer?,
         webRequest: NativeWebRequest,
         binderFactory: WebDataBinderFactory?
-    ): AuthUser? {
+    ): AuthUser {
         if (parameter.parameterType == AuthUser::class.java) {
-            var authToken = webRequest.getHeader("authToken")
-            if (authToken == null) {
+            var authorization = webRequest.getHeader("Authorization")
+            if (authorization == null) {
                 val servletRequest = webRequest.nativeRequest as HttpServletRequest
-                val authTokenCookie = WebUtils.getCookie(servletRequest, "authToken")
+                val authTokenCookie = WebUtils.getCookie(servletRequest, "Authorization")
                 if (authTokenCookie != null)
-                    authToken = authTokenCookie.value
+                    authorization = authTokenCookie.value
             }
-            return authTokenHandler.getUserInfoFromToken(authToken!!)
+            return authTokenHandler.getUserInfoFromToken(authorization!!)
         }
-
-        return null
+        throw RuntimeException("사용자 정보를 찾을 수 없습니다. Authorization 을 확인하세요.")
     }
 
 }

@@ -5,6 +5,7 @@ import com.tistory.eclipse4j.core.primary.memo.entity.MemoEntity
 import com.tistory.eclipse4j.core.primary.memo.entity.MemoTagEntity
 import com.tistory.eclipse4j.core.primary.memo.entity.MemoType
 import java.io.Serializable
+import java.util.stream.Collectors
 
 data class MemoForm(
     val title: String,
@@ -20,6 +21,7 @@ data class MemoForm(
                 title = form.title,
                 contents = form.contents,
                 memoType = form.memoType,
+                memoTags = MemoTagForm.toEntities(form.memoTags)
             )
         }
     }
@@ -56,6 +58,12 @@ data class MemoTagForm(
                 tag = form.tag,
                 sort = form.sort,
             )
+        }
+
+        fun toEntities(memoTags: List<MemoTagForm>): MutableList<MemoTagEntity> {
+            return memoTags.stream().map {
+                MemoTagForm.toEntity(it)
+            }.collect(Collectors.toList())
         }
     }
 

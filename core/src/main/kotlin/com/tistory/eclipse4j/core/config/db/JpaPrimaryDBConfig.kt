@@ -1,5 +1,6 @@
 package com.tistory.eclipse4j.core.config.db
 
+import com.tistory.eclipse4j.core.primary.base.entity.AuditorAwareImpl
 import com.zaxxer.hikari.HikariDataSource
 import jakarta.persistence.EntityManagerFactory
 import jakarta.persistence.PersistenceContext
@@ -11,6 +12,8 @@ import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
+import org.springframework.data.domain.AuditorAware
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.orm.jpa.JpaTransactionManager
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
@@ -19,6 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 import javax.sql.DataSource
 
 
+@EnableJpaAuditing(auditorAwareRef="auditorProvider")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = ["com.tistory.eclipse4j.core.primary"],
     transactionManagerRef = "primaryTransactionManager",
@@ -61,5 +65,10 @@ class JpaPrimaryDBConfig {
         @Qualifier("primaryEntityManagerFactory") primaryEntityManagerFactory: EntityManagerFactory
     ): PlatformTransactionManager {
         return JpaTransactionManager(primaryEntityManagerFactory)
+    }
+
+    @Bean(name = ["auditorProvider"])
+    fun auditorProvider(): AuditorAware<String> {
+        return AuditorAwareImpl()
     }
 }
