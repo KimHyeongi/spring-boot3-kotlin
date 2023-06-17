@@ -7,8 +7,9 @@ import java.util.*
 
 class AuditorAwareImpl: AuditorAware<String> {
     override fun getCurrentAuditor(): Optional<String> {
-        val auditorUserProvider:AuditorUserProvider =
-            MemoApplicationContextProvider.getContext().getBean("auditorUserProvider") as AuditorUserProvider
-        return Optional.of(auditorUserProvider.setAuditorUserEmail())
+        val auditorUserProvider = MemoApplicationContextProvider
+                .getContext()
+                .getBean("auditorUserProvider") as AuditorUserProvider
+        return Optional.of(auditorUserProvider.getAuditorUserEmail())
     }
 }

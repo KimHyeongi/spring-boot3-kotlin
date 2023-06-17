@@ -1,4 +1,5 @@
 object Versions {
+
     const val kotlinx_serialization =  "1.4.1"
     const val dependency_management = "1.1.0"
     const val spring_boot = "3.1.0"
@@ -31,5 +32,6 @@ object Versions {
     const val hibernate_types_55 = "2.21.1"
 
     const val jwt = "4.4.0"
+    const val openapi = "1.7.0"
 }
 
