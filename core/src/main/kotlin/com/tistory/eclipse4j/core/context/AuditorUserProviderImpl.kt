@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 @Profile("prod")
 class AuditorUserProviderProd(): AuditorUserProvider{
     private var auditorUser: AuditorUser? = null
-    fun setAuditorUser(auditorUser:AuditorUser){
+    override fun setAuditorUser(auditorUser:AuditorUser){
         this.auditorUser = auditorUser
     }
 
