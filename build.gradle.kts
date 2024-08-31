@@ -1,18 +1,18 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.0"
-    id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version Versions.kotlin
     kotlin("plugin.spring") version Versions.kotlin
     kotlin("plugin.jpa") version Versions.kotlin apply false
     kotlin("kapt") version Versions.kotlin
+
+    id("org.springframework.boot") version Versions.spring_boot
+    id("io.spring.dependency-management") version Versions.dependency_management
     idea
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_17
-java.targetCompatibility = JavaVersion.VERSION_17
-
+java.sourceCompatibility = JavaVersion.VERSION_21
+java.targetCompatibility = JavaVersion.VERSION_21
 
 allprojects {
     group = "com.tistory.eclipse4j"
@@ -48,11 +48,6 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_stdlib}")
         implementation("io.github.microutils:kotlin-logging:${Versions.kotlin_logging}")
-
-        implementation("ch.qos.logback:logback-core")
-        implementation("ch.qos.logback:logback-access")
-        implementation("ch.qos.logback:logback-classic")
-        implementation("net.logstash.logback:logstash-logback-encoder:${Versions.logstash_logback_encoder}")
 
         testImplementation("org.junit.jupiter:junit-jupiter:${Versions.junit_jupiter}")
         testImplementation("org.testcontainers:testcontainers:${Versions.testcontainers}")

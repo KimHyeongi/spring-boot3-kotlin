@@ -2,8 +2,6 @@ package com.tistory.eclipse4j.core.primary.memo.entity
 
 import jakarta.persistence.*
 import org.hibernate.annotations.Comment
-import org.hibernate.annotations.Where
-
 
 @Entity
 @Table(
