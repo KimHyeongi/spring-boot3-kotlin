@@ -59,3 +59,9 @@ spring:
 
 local:
   timezone: "Asia/Seoul"
+kotest:
+  framework:
+    classpath:
+      scanning:
+        autoscan:
+          disable: true

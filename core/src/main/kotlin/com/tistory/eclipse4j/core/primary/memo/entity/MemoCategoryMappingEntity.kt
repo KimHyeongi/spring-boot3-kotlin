@@ -3,7 +3,7 @@ package com.tistory.eclipse4j.core.primary.memo.entity
 import com.tistory.eclipse4j.core.primary.base.entity.AuditingEntity
 import jakarta.persistence.*
 import org.hibernate.annotations.Comment
-import org.hibernate.annotations.Where
+import org.hibernate.annotations.SQLRestriction
 
 @Entity
 @Table(
@@ -20,10 +20,10 @@ class MemoCategoryMappingEntity(
     var id: Long? = null,
     sort: Int,
     @ManyToOne(fetch = FetchType.LAZY)
-    @Where(clause = "deleted = false")
+    @SQLRestriction("deleted = false")
     var memo: MemoEntity,
     @ManyToOne(fetch = FetchType.LAZY)
-    @Where(clause = "deleted = false")
+    @SQLRestriction("deleted = false")
     var memoCategory: MemoCategoryEntity
 ): AuditingEntity() {
     @Column(nullable = false, name = "sort")
